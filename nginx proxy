@@ -1,0 +1,19 @@
+server {
+    listen 80;
+    server_name akashsharma.ddns.net;
+    return 301 https://akashsharma.ddns.net;
+}
+
+server {
+    listen 443 ssl;
+    server_name akashsharma.ddns.net;
+    ssl_certificate /etc/letsencrypt/live/akashsharma.ddns.net/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/akashsharma.ddns.net/privkey.pem;
+    ssl_protocols TLSv1.2 TLSv1.3;
+    client_max_body_size 100M;
+    server_name akashsharma.ddns.net;
+
+    location / {
+        proxy_pass http://localhost:3000;
+    }
+}
